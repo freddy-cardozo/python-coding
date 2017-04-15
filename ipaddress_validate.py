@@ -1,26 +1,41 @@
+#--------------------------------------------------------
+# Author : Freddy Cardozo
+#
+#
+#
+#
+# This python pgm checks whether the network IP address is valid 
+# 
+# -------------------------------------------------------
 import re
-import traceback
-ip='99.10.10.10'
+from sys import version_info as python_version 
+
+# Generic function to display message to the O/p based upon python version
+def printOp(msg):
+    if (major, minor) > (3,0):
+        eval("print (msg)")
+    else:
+        eval("print msg")
+
+# Get the python version being used
+(major, minor, micro, release, serial) = python_version
+
 choice='y'
 while(choice == 'y'):
-    ip = raw_input('Enter your IP address : ')
+    printOp('*'*20)
+    if (major, minor) > (3, 0):
+        ip = input("\tENTER THE IP ADDRESS : ")
+    else:
+        ip = raw_input("\tENTER THE IP ADDRESS : ")
+
     try:
         if [0<=int(x)<256 for x in re.split('\.',re.match(r'^\d+\.\d+\.\d+\.\d+$',ip).group(0))].count(True)==4:
-            print "\t\tVALID IP  ADDRESS {}".format(ip)
+            printOp("\t\tVALID IP  ADDRESS : " + ip)
         else:
-            print "\t\tINVALID IP ADDRESS {}".format(ip)
+            printOp("\t\tINVALID IP  ADDRESS : " + ip)
     except:
-        print "INVALID IP ADDRESS {}".format(ip)
-    emailAddr = raw_input('Enter your email address : ')
-    try:
-        matchObj = re.match("[-_a-z0-9]+@[-_a-z0-9]+\.[a-zA-Z]{3,3}$", emailAddr, re.I)
-        if matchObj:
-            print (matchObj.group())
-            print "\t\t VALID EMAIL ADDRESS {}".format(emailAddr)
-        else:
-            print "\t\t INVALID EMAIL ADDRESS ::{}--".format(emailAddr)
-    except:
-        print "EXCEPTION"
-        traceback.print_exc()
-        print "\t\t INVALID EMAIL ADDRESS {}".format(emailAddr)
-    choice = raw_input('Do you want to continue (y/n)')
+        printOp("\t\tINVALID IP  ADDRESS : " + ip)
+    if (major, minor) > (3, 0):
+        choice = input("\n\nDO YOU WANT TO CONTINUE (y/n) : ")
+    else:
+        choice = raw_input("DO YOU WANT TO CONTINUE (y/n) : ")
