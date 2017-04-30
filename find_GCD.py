@@ -42,7 +42,7 @@ def demoDisplay(msg):
     
 def displayDemoMsg(msg):
     for ch in msg:
-        sys.stdout.write(ch)
+        sys.stdout.write('\x1b[6;34;46m' + ch + '\x1b[0m')
         sys.stdout.flush()
         sleeping(0.05)
 #Get the python version being used
@@ -55,9 +55,9 @@ if '-demo' in cmd_line_arguments:
     displayDemoMsg(msg)
 if not demo:    
     if (pythonMajorVersion, pythonMinorVersion) > (3,0):
-        numNumbers = int(input("\tENTER THE NUMBER OF +ve INTEGERS TO FIND G.C.D : "))
+        numNumbers = int(input('\x1b[6;34;46m' + "\tENTER THE NUMBER OF +ve INTEGERS TO FIND G.C.D : " + '\x1b[0m'))
     else:
-        numNumbers = int(raw_input("\tENTER THE NUMBER OF +ve INTEGERS TO FIND G.C.D : "))
+        numNumbers = int(raw_input('\x1b[6;34;46m' + "\tENTER THE NUMBER OF +ve INTEGERS TO FIND G.C.D : " + '\x1b[0m'))
 else:
     demoDisplay("\tENTER THE NUMBER OF +ve INTEGERS TO FIND G.C.D : ")
     demoDisplay("2\n")
@@ -67,12 +67,12 @@ else:
 for _ in range(1, numNumbers+1):
     if not demo:
         if (pythonMajorVersion, pythonMinorVersion) > (3,0):
-            numList.append(int(input("\tENTER NUMBER" + str(_) + " : ")))
+            numList.append(int(input('\x1b[6;34;46m' + "\tENTER NUMBER" + str(_) + " : " + '\x1b[0m')))
         else:
-            numList.append(int(raw_input("\tENTER NUMBER" + str(_) + " : ")))
+            numList.append(int(raw_input('\x1b[6;34;46m' + "\tENTER NUMBER" + str(_) + " : "+ '\x1b[0m')))
     else:
         demoDisplay("\tENTER NUMBER" + str(_) + " : ")
         demoDisplay(str(numList[_ - 1]) + "\n")
     
 gcd = findGCD()
-printOp("\t  GCD = " + str(gcd))    
+printOp('\x1b[2;30;42m' + "\t  GCD = " + str(gcd) + '\x1b[0m')    
