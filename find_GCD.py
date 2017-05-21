@@ -33,7 +33,7 @@ def printOp(msg):
     if (pythonMajorVersion, pythonMinorVersion) > (3,0):
         eval("print (msg)")
     else:
-        eval("print msg")
+        sys.stdout.write(msg)
 
 def demoDisplay(msg):
     sys.stdout.write(msg)
@@ -75,4 +75,5 @@ for _ in range(1, numNumbers+1):
         demoDisplay(str(numList[_ - 1]) + "\n")
     
 gcd = findGCD()
-printOp('\x1b[2;30;42m' + "\t  GCD = " + str(gcd) + '\x1b[0m')    
+
+printOp('\n' + '\x1b[2;30;42m' + "\t  GCD = " + str(gcd) + ' ' + '\x1b[0m' + '\n')  
