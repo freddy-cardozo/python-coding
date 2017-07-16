@@ -37,7 +37,7 @@ def displayDemoMsg(msg):
     for ch in msg:
         sys.stdout.write('\x1b[6;34;46m' + ch + '\x1b[0m')
         sys.stdout.flush()
-        sleeping(0.05)
+        sleeping(0.05) 
 
 #Get the python version being used
 (pythonMajorVersion, pythonMinorVersion, micro, release, serial) = python_version
