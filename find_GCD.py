@@ -4,76 +4,76 @@
 #
 #
 #
-# This python pgm finds the geometric mean of 'N' numbers 
-# using the numpy python module
+# This python pgm finds the G.C.D (Greatest Common Divisor)
+# between 'N' number
+# python find_GCD.py -demo 
+#   The above command gives a demo of this pgm
+# python find_GCD.py 
+#   The above command executes the pgm
+
 # -------------------------------------------------------
 
-import numpy
 import re
 import sys
-
 from sys import version_info as python_version 
 from sys import argv as cmd_line_arguments
 from pdb import set_trace as st
 from time import sleep as sleeping
 
-def findGeoMean():
-    # Convert the list of Numbers into a numpy array
-    numpyArray = numpy.array(numList)
+#Function to find the G.C.D between N integers
+def findGCD():
+    smallest = sorted(numList, reverse=False)[0]
+    for i in range(1, smallest + 1):
+        if (list(map(lambda x: x%i, numList)).count(0) == len(numList)):
+            gcd = i
+    return gcd
     
-    # Calculate the product of each element of the numpy array
-    productArray = numpyArray.prod()
-    
-    # Calculate the geomean which is the 'N' root of the product of the elements of the array
-    geoMean = float(productArray**(1/float(numNumbers)))
-    return geoMean
+# Generic function to display message to the O/p based upon python version
+def printOp(msg):
+    if (pythonMajorVersion, pythonMinorVersion) > (3,0):
+        eval("print (msg)")
+    else:
+        sys.stdout.write(msg)
 
 def demoDisplay(msg):
     sys.stdout.write(msg)
     sys.stdout.flush()
     sleeping(2)
     
-def displayDemoMsg(msg, displaySerial=1):
-    if displaySerial:
-        for ch in msg:
-            sys.stdout.write('\x1b[6;34;46m' + ch + '\x1b[0m')
-            sys.stdout.flush()
-            sleeping(0.05)
-    else:
-        sys.stdout.write(msg)
+def displayDemoMsg(msg):
+    for ch in msg:
+        sys.stdout.write('\x1b[6;34;46m' + ch + '\x1b[0m')
         sys.stdout.flush()
-        sleeping(2)
+        sleeping(0.05)
 #Get the python version being used
 (pythonMajorVersion, pythonMinorVersion, micro, release, serial) = python_version
 demo = None
 numList = []
-
 if '-demo' in cmd_line_arguments:
     demo=1
-    msg = """THIS IS A PYTHON PROGRAM WHICH CALCULATES THE GEOMETRIC MEAN \nOF 'N' NUMBERS \n"""
+    msg = """THIS IS A PYTHON PROGRAM WHICH CALCULATES THE G.C.D (GREATEST COMMON DIVISOR) \nOF 'N' NUMBER OF POSITIVE INTEGERS\n"""
     displayDemoMsg(msg)
-
 if not demo:    
     if (pythonMajorVersion, pythonMinorVersion) > (3,0):
-        numNumbers = int(input('\x1b[6;34;46m' + "\tENTER THE NUMBER OF NUMBERS TO FIND GEOMETRIC MEAN : " + '\x1b[0m'))
+        numNumbers = int(input('\x1b[6;34;46m' + "\tENTER THE NUMBER OF +ve INTEGERS TO FIND G.C.D : " + '\x1b[0m'))
     else:
-        numNumbers = int(raw_input('\x1b[6;34;46m' + "\tENTER THE NUMBER OF NUMBERS TO FIND GEOMETRIC MEAN : " + '\x1b[0m'))
+        numNumbers = int(raw_input('\x1b[6;34;46m' + "\tENTER THE NUMBER OF +ve INTEGERS TO FIND G.C.D : " + '\x1b[0m'))
 else:
-    displayDemoMsg("\tENTER THE NUMBER OF NUMBERS TO FIND GEOMETRIC MEAN : ", 0)
-    displayDemoMsg("2\n", 0)
+    demoDisplay("\tENTER THE NUMBER OF +ve INTEGERS TO FIND G.C.D : ")
+    demoDisplay("2\n")
     numList = [12,48]
     numNumbers=2
 
 for _ in range(1, numNumbers+1):
     if not demo:
         if (pythonMajorVersion, pythonMinorVersion) > (3,0):
-            numList.append(float(input('\x1b[6;34;46m' + "\tENTER NUMBER" + str(_) + " : " + '\x1b[0m')))
+            numList.append(int(input('\x1b[6;34;46m' + "\tENTER NUMBER" + str(_) + " : " + '\x1b[0m')))
         else:
-            numList.append(float(raw_input('\x1b[6;34;46m' + "\tENTER NUMBER" + str(_) + " : "+ '\x1b[0m')))
+            numList.append(int(raw_input('\x1b[6;34;46m' + "\tENTER NUMBER" + str(_) + " : "+ '\x1b[0m')))
     else:
-        displayDemoMsg("\tENTER NUMBER" + str(_) + " : ", 0)
-        displayDemoMsg(str(numList[_ - 1]) + "\n", 0)
+        demoDisplay("\tENTER NUMBER" + str(_) + " : ")
+        demoDisplay(str(numList[_ - 1]) + "\n")
+    
+gcd = findGCD()
 
-gcd = findGeoMean()
-
-sys.stdout.write('\n' + '\x1b[2;30;42m' + "\t GEOMETRIC MEAN = " + str(gcd) + ' ' + '\x1b[0m' + '\n')  
+printOp('\n' + '\x1b[2;30;42m' + "\t  GCD = " + str(gcd) + ' ' + '\x1b[0m' + '\n')  
