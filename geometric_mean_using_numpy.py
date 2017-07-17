@@ -33,12 +33,16 @@ def demoDisplay(msg):
     sys.stdout.flush()
     sleeping(2)
     
-def displayDemoMsg(msg):
-    for ch in msg:
-        sys.stdout.write('\x1b[6;34;46m' + ch + '\x1b[0m')
+def displayDemoMsg(msg, displaySerial=1):
+    if displaySerial:
+        for ch in msg:
+            sys.stdout.write('\x1b[6;34;46m' + ch + '\x1b[0m')
+            sys.stdout.flush()
+            sleeping(0.05)
+    else:
+        sys.stdout.write(msg)
         sys.stdout.flush()
-        sleeping(0.05) 
-
+        sleeping(2)
 #Get the python version being used
 (pythonMajorVersion, pythonMinorVersion, micro, release, serial) = python_version
 demo = None
@@ -55,8 +59,8 @@ if not demo:
     else:
         numNumbers = int(raw_input('\x1b[6;34;46m' + "\tENTER THE NUMBER OF NUMBERS TO FIND GEOMETRIC MEAN : " + '\x1b[0m'))
 else:
-    demoDisplay("\tENTER THE NUMBER OF NUMBERS TO FIND GEOMETRIC MEAN : ")
-    demoDisplay("2\n")
+    displayDemoMsg("\tENTER THE NUMBER OF NUMBERS TO FIND GEOMETRIC MEAN : ", 0)
+    displayDemoMsg("2\n", 0)
     numList = [12,48]
     numNumbers=2
 
@@ -67,8 +71,8 @@ for _ in range(1, numNumbers+1):
         else:
             numList.append(float(raw_input('\x1b[6;34;46m' + "\tENTER NUMBER" + str(_) + " : "+ '\x1b[0m')))
     else:
-        demoDisplay("\tENTER NUMBER" + str(_) + " : ")
-        demoDisplay(str(numList[_ - 1]) + "\n")
+        displayDemoMsg("\tENTER NUMBER" + str(_) + " : ", 0)
+        displayDemoMsg(str(numList[_ - 1]) + "\n", 0)
 
 gcd = findGeoMean()
 
