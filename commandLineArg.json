@@ -1,0 +1,28 @@
+{
+  "-name" : {
+       "dest"    : "name",
+       "default" : "Freddy",
+       "action"  : "store",
+       "choices" : ["Freddy", "Johnson"],
+       "help"    : "Specify the Person Name"
+  },
+  "-surname" : {
+       "dest"    : "surname",
+       "default" : "Cardozo",
+       "action"  : "store",
+       "choices" : ["Cardozo", "Dsilva"],
+       "help"    : "Specify the Person surname"
+  },
+  "-city" : {
+       "dest"    : "city",
+       "default" : "Mumbai",
+       "action"  : "store",
+       "choices" : ["Mumbai", "New York", "Jaipur"],
+       "help"    : "Specify the name of city"
+  },
+   "-demo" : {
+       "dest"    : "demo",
+       "action"  : "store_true",
+       "help"    : "Give the demo of the python program"
+  }
+}
